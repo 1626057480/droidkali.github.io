@@ -123,14 +123,14 @@
 <meta property="og:site_name" content="纯真&#39;s Blog">
 <meta property="og:description" content="0x00 前言前段时间玩过一阵子ESP8266 WiFi Deauth攻击，闲的无聊来水一波文章！ 0x01 背景我们所使用的802.11 WiFi协议包含了一个Deauthentication(解除身份验证)的特性，其作用是为了将用户从无线网络中分离。而黑客们正是利用了WiFi的这个特性，使得黑客可以随时使用无线AP的伪造源地址，向无线AP设备发送一个或多个Deauthentication攻击数">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/h1jacker/images/master/esp8266-scan.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/h1jacker/images/master/esp8266-attack.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/h1jacker/images/master/esp8266-attacking.png">
-<meta property="og:updated_time" content="2019-04-27T12:24:12.665Z">
+<meta property="og:image" content="https://raw.fastgit.org/DroidKali/images/master/esp8266-scan.png">
+<meta property="og:image" content="https://raw.fastgit.org/DroidKali/images/master/esp8266-attack.png">
+<meta property="og:image" content="https://raw.fastgit.org/DroidKali/images/master/esp8266-attacking.png">
+<meta property="og:updated_time" content="2021-01-30T15:04:50.810Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="wifi-deauth-attack初探">
 <meta name="twitter:description" content="0x00 前言前段时间玩过一阵子ESP8266 WiFi Deauth攻击，闲的无聊来水一波文章！ 0x01 背景我们所使用的802.11 WiFi协议包含了一个Deauthentication(解除身份验证)的特性，其作用是为了将用户从无线网络中分离。而黑客们正是利用了WiFi的这个特性，使得黑客可以随时使用无线AP的伪造源地址，向无线AP设备发送一个或多个Deauthentication攻击数">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/h1jacker/images/master/esp8266-scan.png">
+<meta name="twitter:image" content="https://raw.fastgit.org/DroidKali/images/master/esp8266-scan.png">
 
 
 
@@ -543,7 +543,7 @@
 <p><a href="https://github.com/spacehuhn/esp8266_deauther/releases" target="_blank" rel="noopener">https://github.com/spacehuhn/esp8266_deauther/releases</a></p>
 </blockquote>
 <p>这里需要注意的是固件的选择要根据你的模块Flash大小来选择，ESP-12的Flash大小为4MB，ESP-07的为1MB,ESP-01的为512KB/1MB。详细说明可以参考<a href="https://github.com/spacehuhn/esp8266_deauther/wiki/Installation#flash-size" target="_blank" rel="noopener">官方wiki</a><br>接下来我们开始刷入固件，打开NodeMcu Flasher，点击Config选项卡，选择你的固件，接着点击Advanced选项卡，在Baudrate(波特率)处选择115200，Flash size根据你的板子Flash大小来选择，我这里是ESP-12所以选择4MB，Flash speed选择80MHz，SPI mode选择DIO,最后我们点击Operation选项卡，在COM port处选择你的板子的端口，可以在windows的设备管理那里看到，然后点击Flash(F)按钮，接着就是等待固件烧录完成了。固件烧录完成后NodeMcu Flasher左下角的NODEMCU TEAM图标会变为绿色。</p>
-<h1 id="0x04-攻击实战"><a href="#0x04-攻击实战" class="headerlink" title="0x04 攻击实战"></a>0x04 攻击实战</h1><p>接着我们打开手机WiFi设置，能搜索到一个SSID名为<strong><em>pwned</em></strong>的WiFi，这个就是我们烧录好固件之后生成的，密码为<strong><em>deauther</em></strong>，连接上去。接着我们打开手机浏览器，在地址栏输入<strong><em><a href="http://192.168.4.1" target="_blank" rel="noopener">http://192.168.4.1</a></em></strong>进入deauther的后台管理界面，如图:<img src="https://raw.githubusercontent.com/h1jacker/images/master/esp8266-scan.png" alt="esp8266-scan">由于最新<strong><em>v2.1.0</em></strong>版的固件自带了一个开机自动扫描AP的脚本，所以就不需要我们连上后再手动扫描了，当然如果你想得到更准确的结果的话你也可以重新扫描。扫描周围的无线热点后，我们选择一个目标开始攻击，这里我选择的FAST_4E14这个热点，然后选择攻击界面，如图:<img src="https://raw.githubusercontent.com/h1jacker/images/master/esp8266-attack.png" alt="esp8266-attack">选择Deauth攻击，接着刷新界面就能看到攻击效果了<img src="https://raw.githubusercontent.com/h1jacker/images/master/esp8266-attacking.png" alt="esp8266-attacking">此时被攻击的无线AP上所有已连接的设备会全部掉线直至我们停止攻击。</p>
+<h1 id="0x04-攻击实战"><a href="#0x04-攻击实战" class="headerlink" title="0x04 攻击实战"></a>0x04 攻击实战</h1><p>接着我们打开手机WiFi设置，能搜索到一个SSID名为<strong><em>pwned</em></strong>的WiFi，这个就是我们烧录好固件之后生成的，密码为<strong><em>deauther</em></strong>，连接上去。接着我们打开手机浏览器，在地址栏输入<strong><em><a href="http://192.168.4.1" target="_blank" rel="noopener">http://192.168.4.1</a></em></strong>进入deauther的后台管理界面，如图:<img src="https://raw.fastgit.org/DroidKali/images/master/esp8266-scan.png" alt="esp8266-scan">由于最新<strong><em>v2.1.0</em></strong>版的固件自带了一个开机自动扫描AP的脚本，所以就不需要我们连上后再手动扫描了，当然如果你想得到更准确的结果的话你也可以重新扫描。扫描周围的无线热点后，我们选择一个目标开始攻击，这里我选择的FAST_4E14这个热点，然后选择攻击界面，如图:<img src="https://raw.fastgit.org/DroidKali/images/master/esp8266-attack.png" alt="esp8266-attack">选择Deauth攻击，接着刷新界面就能看到攻击效果了<img src="https://raw.fastgit.org/DroidKali/images/master/esp8266-attacking.png" alt="esp8266-attacking">此时被攻击的无线AP上所有已连接的设备会全部掉线直至我们停止攻击。</p>
 <h1 id="0x05-安全建议"><a href="#0x05-安全建议" class="headerlink" title="0x05 安全建议"></a>0x05 安全建议</h1><p>由于WiFi Deauth攻击是802.11协议上的一个缺陷造成的，所以目前并没有什么有效的防御措施，只能等无线联盟更新协议来弥补这个缺憾。个人的话尽量按照以下几点来做吧</p>
 <blockquote>
 <p>·路由设置白名单或MAC地址绑定<br>·开启访客WiFi<br>·隐藏SSID<br>·不用WiFi时尽量关闭路由</p>
@@ -591,7 +591,7 @@
        <p><span>本文标题:</span><a href="/2018/12/06/wifi-deauth-attack.html">wifi-deauth-attack初探</a></p>
        <p><span>文章作者:</span><a href="/" title="访问 jiyili 的个人博客">jiyili</a></p>
        <p><span>发布时间:</span>2018年12月06日 - 19:12</p>
-       <p><span>最后更新:</span>2019年04月27日 - 20:04</p>
+       <p><span>最后更新:</span>2021年01月30日 - 23:01</p>
        <p><span>原始链接:</span><a href="/2018/12/06/wifi-deauth-attack.html" title="wifi-deauth-attack初探">https://droidkali.github.io/2018/12/06/wifi-deauth-attack.html</a>
 	 <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://droidkali.github.io/2018/12/06/wifi-deauth-attack.html" aria-label="复制成功！"></i></span>
        </p>
@@ -869,10 +869,6 @@
                 
                   <li class="links-of-blogroll-item">
                     <a href="http://www.frostsaber.com" title="http://www.frostsaber.com" rel="noopener" target="_blank">FrostsaberX's Blog</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="http://droid-max.github.io/" title="http://droid-max.github.io/" rel="noopener" target="_blank">傻狍子</a>
                   </li>
                 
               </ul>
